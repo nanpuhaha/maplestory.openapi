@@ -21,9 +21,8 @@ def get_proper_default_datetime(day_offset: int, update_hour: int = 0, update_mi
 
     adjusted_time: datetime
 
-    if now > update_time:
-        adjusted_time = update_time - timedelta(days=day_offset)
-    else:
-        adjusted_time = update_time - timedelta(days=day_offset + 1)
-
-    return adjusted_time
+    return (
+        update_time - timedelta(days=day_offset)
+        if now > update_time
+        else update_time - timedelta(days=day_offset + 1)
+    )
